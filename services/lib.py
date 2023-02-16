@@ -1,5 +1,6 @@
 import database as db
 
+
 def check_available_cars(lst, tourists):
     return [x for x in lst if x['users_count'] + tourists <=
             x['max_users_count']]
@@ -15,7 +16,7 @@ def get_drives_list(context):
             'FROM main '
             'WHERE district=%s '
             'AND class_auto=%s '
-            'AND %s<=max_users_count '
+            'AND max_users_count<=%s '
             'AND create_date >= '
             'DATE_SUB(NOW(), INTERVAL 1 MINUTE);',
             (context.user_data['district'],
