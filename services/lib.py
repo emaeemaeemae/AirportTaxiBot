@@ -18,7 +18,7 @@ def get_drives_list(context):
             'AND class_auto=%s '
             'AND max_users_count<=%s '
             'AND create_date >= '
-            'DATE_SUB(NOW(), INTERVAL 1 MINUTE);',
+            'DATE_SUB(NOW(), INTERVAL 10 MINUTE);',
             (context.user_data['district'],
              context.user_data['class_auto'],
              context.user_data['max_users_count']))
@@ -54,7 +54,7 @@ def add_users_to_drive(tour, context):
             'WHERE id=%s;',
             (tour['id']))
 
-        tour['users_count'] = c.fetchone()['id']
+        tour['users_count'] = c.fetchone()['users_count']
 
         new_count = tour['users_count'] + context.user_data['users_count']
         if new_count <= tour['max_users_count']:
