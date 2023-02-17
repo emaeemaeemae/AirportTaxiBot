@@ -113,7 +113,6 @@ async def class_(update: Update, context: ContextTypes.DEFAULT_TYPE):
         text=f"Класс авто - {context.user_data['class_auto']}\n")
 
     r_m = get_drives_list_keyboard(context)
-
     if r_m:
         await send_response(
             update,
@@ -124,14 +123,12 @@ async def class_(update: Update, context: ContextTypes.DEFAULT_TYPE):
     else:
         context.user_data['admin_username'] = \
             update.callback_query.from_user.username
-
         await send_response(
             update,
             context,
             render_template('empty_drives_list.j2'),
             keyboard=get_create_drive_keyboard()
         )
-
     return CHOSE_DRIVE
 
 
