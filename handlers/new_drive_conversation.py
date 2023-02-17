@@ -118,8 +118,7 @@ async def class_(update: Update, context: ContextTypes.DEFAULT_TYPE):
         await send_response(
             update,
             context,
-            render_template('drives_list.j2',
-                            data={'data': context.user_data}),
+            render_template('drives_list.j2'),
             keyboard=r_m
         )
     else:
@@ -177,8 +176,7 @@ async def chose_drive(update: Update, context: ContextTypes.DEFAULT_TYPE):
                 await send_response(
                     update,
                     context,
-                    render_template('drives_list.j2',
-                                    data={'data': context.user_data}),
+                    render_template('drives_list.j2'),
                     keyboard=r_m
                 )
             else:
