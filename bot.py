@@ -1,12 +1,11 @@
-import os
 import logging
 
 import handlers
+import config
 
 from telegram.ext import (
     ApplicationBuilder,
     CommandHandler)
-from dotenv import load_dotenv
 
 
 # add logger
@@ -20,11 +19,7 @@ logger = logging.getLogger(__name__)
 
 COMMAND_HANDLERS = {
     "start": handlers.start,
-    "help": handlers.help_,
-    # "already": handlers.already,
-    # "now": handlers.now,
-    # "vote": handlers.vote,
-    # "cancel": handlers.cancel
+    "help": handlers.help_
 }
 
 
@@ -32,7 +27,7 @@ class Bot:
 
     def __init__(self):
         self.application = ApplicationBuilder(). \
-            token(os.getenv('TELEGRAM_BOT_TOKEN')).build()
+            token(config.TELEGRAM_BOT_TOKEN).build()
 
         # handlers init
         for command_name, command_handler in COMMAND_HANDLERS.items():
@@ -44,7 +39,6 @@ class Bot:
 
 # run
 if __name__ == '__main__':
-    load_dotenv()
     start_logging()
     bot = Bot()
     bot.application.run_polling()
