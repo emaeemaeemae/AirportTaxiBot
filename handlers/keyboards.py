@@ -3,7 +3,7 @@ from telegram import (
     InlineKeyboardMarkup
 )
 
-from .config_handlers import *
+from config import *
 
 
 def get_district_keyboard():
@@ -33,7 +33,7 @@ def get_max_users_count_keyboard(context):
     return InlineKeyboardMarkup(keyboard)
 
 
-def get_class_keyboard():
+def get_class_auto_keyboard():
     keyboard = [
         [
             InlineKeyboardButton(d, callback_data=data)
@@ -43,14 +43,14 @@ def get_class_keyboard():
     return InlineKeyboardMarkup(keyboard)
 
 
-def get_drives_list_keyboard(data):
+def get_drives_list_keyboard(context):
     keyboard = [
         [
             InlineKeyboardButton(f"Вариант {i + 1} - "
                                  f"{x['users_count']} из "
                                  f"{x['max_users_count']} человек",
                                  callback_data=x['admin_username'])
-        ] for i, x in enumerate(data['drives_list'])
+        ] for i, x in enumerate(context.user_data['drives_list'])
     ]
     # TODO отмена
     return InlineKeyboardMarkup(keyboard) if keyboard else False
