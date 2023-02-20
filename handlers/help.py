@@ -1,10 +1,13 @@
 from telegram import Update
 from telegram.ext import ContextTypes
 
+from templates import render_template
+from handlers.response import send_response
+
 
 async def help_(update: Update, context: ContextTypes.DEFAULT_TYPE):
-    await context.bot.send_message(chat_id=update.effective_chat.id,
-                                   text="Команды бота:\n"
-                                        "/start - приветственное сообщение\n"
-                                        "/help - справка\n"
-                                        "/new_drive - новая поездка")
+    await send_response(
+        update,
+        context,
+        render_template('help.j2')
+    )
